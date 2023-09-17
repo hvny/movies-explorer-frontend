@@ -1,0 +1,115 @@
+.movie-card {
+    width: 360px;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    row-gap: 14px;
+    justify-content: space-between;
+}
+
+.movie-card__image {
+    width: 100%;
+}
+
+.movie-card__button {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+}
+
+.movie-card__button_save {
+    width: 72px;
+    height: 21px;
+    background: url("../../../../src/images/card-save-button.svg") no-repeat center / cover;
+}
+
+.movie-card__button_saved {
+    width: 21px;
+    height: 21px;
+    background: url("../../../../src/images/saved-button.svg") no-repeat center / cover;
+}
+
+.movie-card__button_delete {
+    width: 21px;
+    height: 21px;
+    background: url("../../../../src/images/card-delete-button.svg") no-repeat center / cover;
+}
+
+.movie-card__title {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: normal;
+    color: #ffffff;
+    margin: 0 0 0 14px;
+}
+
+.movie-card__duration {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 10px;
+    color: #8B8B8B;
+    text-align: center;
+    margin: 0 22px 0 0;
+    z-index: 1;
+}
+
+.movie-card__duration::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    display: block;
+    width: 52px;
+    height: 18px;
+    background-color: #2F2F2F;
+    border-radius: 3px;
+    bottom: 2px;
+    right: 14px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) { 
+    .movie-card {
+        width: 339px;
+        row-gap: 25px;
+    }   
+
+    .movie-card__title {
+        margin-left: 0;
+    }
+    
+    .movie-card__duration {
+        margin-right: 8px;
+    }
+
+    .movie-card__duration::after {
+        bottom: 2px;
+        right: 0;
+    }
+    
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) { 
+    .movie-card {
+        width: 300px;
+        row-gap: 16px;
+    }   
+
+    .movie-card__button {
+        top: 10px;
+        right: 10px;
+    }
+
+    .movie-card__title {
+        margin-left: 0;
+        font-size: 13px;
+    }
+    
+    .movie-card__duration {
+        margin-right: 8px;
+    }
+
+    .movie-card__duration::after {
+        bottom: 2px;
+        right: 0;
+    }
+    
+}
