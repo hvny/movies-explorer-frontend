@@ -7,7 +7,7 @@ function Register() {
     return (
         <main>
             <section className="register auth">
-            <img src={logo} alt="Логотип проекта" className="register__logo auth__logo" ></img>
+            <img src={logo} alt="Логотип проекта" className="auth__logo" ></img>
             <h1 className="register__title auth-form__title">Добро пожаловать!</h1>
 
                 <AuthForm

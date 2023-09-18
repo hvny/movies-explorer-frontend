@@ -5,3 +5,9 @@
 .register__input-container:last-of-type > .auth-form__error {
     opacity: 1;
 }
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .register__input-container:last-of-type {
+        margin-bottom: 179px;
+    }
+}

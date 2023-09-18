@@ -8,7 +8,7 @@ function Login() {
     return (
         <main>
             <section className="login auth">
-            <img src={logo} alt="Логотип проекта" className="register__logo auth__logo" ></img>
+            <img src={logo} alt="Логотип проекта" className="auth__logo" ></img>
             <h1 className="login__title auth-form__title">Рады видеть!</h1>
                 <AuthForm
                     name="signin-form"

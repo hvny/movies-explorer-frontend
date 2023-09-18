@@ -62,7 +62,7 @@
 
 .navigation__overlay {
     z-index: 2;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -86,7 +86,7 @@
 
     .navigation_signin {
         flex-direction: column;
-        position: absolute;
+        position: fixed;
         align-items: center;
         top: 0;
         right: 0;
