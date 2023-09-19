@@ -9,7 +9,16 @@
     display: block;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) { 
+.auth__title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: normal;
+    color: #FFF;
+    margin: 0 0 40px 0;
+    text-align: left;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) { 
     .auth {
         padding: 232px 0 232px 0;
     }

@@ -29,7 +29,7 @@ function Profile() {
                     <h1 className="profile__title">{`Привет, ${formValue.name}!`}</h1>
                     <form className="profile__form" onSubmit={handleSubmit}>
                         <div className="profile__input-container">
-                            <span className="profile__text">Имя</span>
+                            <label className="profile__text">Имя</label>
                             <input 
                                 type="text" 
                                 name="name" 
@@ -41,7 +41,7 @@ function Profile() {
                             />
                         </div>
                         <div className="profile__input-container">
-                            <span className="profile__text">E-mail</span>
+                            <label className="profile__text">E-mail</label>
                             <input 
                                 type="email" 
                                 name="email" 

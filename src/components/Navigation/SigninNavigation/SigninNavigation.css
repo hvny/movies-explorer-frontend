@@ -21,8 +21,18 @@
 
 .navigation__movies-links {
     margin: 0 364px 0 0;
+    padding: 0;
+    list-style-type: none;
     display: flex;
     align-items: center;
+}
+
+.navigation__link-elem {
+    height: max-content;
+}
+
+.navigation__link-elem:first-of-type {
+    display: none;
 }
 
 .navigation__link-signin {
@@ -37,7 +47,7 @@
     display: none;
 }
 
-.navigation__link_movies {
+.navigation__link-elem_movies {
     margin: 0 16px 0 0;
 }
 
@@ -76,13 +86,20 @@
     display: block;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
     .navigation__signin {
         display: flex;
     }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1279px) {
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+
+    .navigation__movies-links {
+        margin-right: 150px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 1023px) {
     .navigation__signin {
         flex-direction: column;
         position: fixed;
@@ -117,7 +134,7 @@
         position: relative;
     }
 
-    .navigation-link__underline {
+    .navigation__link-underline {
         width: 100%;
         height: 2px;
         background-color: #ffffff;
@@ -126,7 +143,7 @@
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
     .navigation__signin {
         width: 520px;
         height: 1024px;
@@ -138,8 +155,16 @@
         row-gap: 28px;
     }
 
-    .navigation-link__underline {
+    .navigation__link-underline {
         bottom: -6px;
+    }
+
+    .navigation__link-elem:first-of-type {
+        display: block;
+    }
+
+    .navigation__link-elem_movies {
+        margin: 0;
     }
 }
 
@@ -160,7 +185,7 @@
         height: 43px;
     }
 
-    .navigation-link__underline {
+    .navigation__link-underline {
         bottom: -9px;
     }
 
@@ -171,5 +196,13 @@
 
     .navigation__link_profile {
         line-height: normal;
+    }
+
+    .navigation__link-elem:first-of-type {
+        display: block;
+    }
+
+    .navigation__link-elem_movies {
+        margin: 0;
     }
 }

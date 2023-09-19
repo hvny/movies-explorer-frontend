@@ -9,16 +9,15 @@ function Register() {
         <main>
             <section className="register auth">
             <Link to="/" className="auth__logo"><img src={logo} alt="Логотип проекта"></img></Link>
-            <h1 className="register__title auth-form__title">Добро пожаловать!</h1>
-
+            <h1 className="register__title auth__title">Добро пожаловать!</h1>
                 <AuthForm
                     name="signup-form"
                     linkText1="Зарегистрироваться"
                     linkText2="Уже зарегистрированы?"
                     linkSpan2="Войти"
                 >
-                     <div className="register__input-container auth-form__input-container">
-                        <p className="register__text auth-form__text">Имя</p>
+                    <div className="register__input-container auth-form__input-container">
+                        <label className="register__text auth-form__text">Имя</label>
                         <input 
                             type="text"
                             name="name"
@@ -31,7 +30,7 @@ function Register() {
                         <span className="auth-form__error">Что-то пошло не так...</span>
                     </div>
                     <div className="register__input-container auth-form__input-container">
-                        <p className="register__text auth-form__text">E-mail</p>
+                        <label className="register__text auth-form__text">E-mail</label>
                         <input 
                             type="email" 
                             name="email"
@@ -44,7 +43,7 @@ function Register() {
                         <span className="auth-form__error">Что-то пошло не так...</span>
                     </div>
                     <div className="register__input-container auth-form__input-container">
-                        <p className="register__text auth-form__text">Пароль</p>
+                        <label className="register__text auth-form__text">Пароль</label>
                         <input 
                             type="password" 
                             name="password"

@@ -15,38 +15,43 @@ function SigninNavigation() {
     return (    
         <>
             <div className={`navigation__signin ${isBurgerOnClick === true ? "navigation_opened" : ""}`}>
-                <button className="navigation__button_close button" onClick={handleButtonClick} />
-                <div className="navigation__movies-links">
-                    <Link 
-                        to="/" 
-                        className={`navigation__link navigation__link-signin navigation__link_main button 
-                       `}
-                    >
-                        Главная
-                        <div className={`${location.pathname === "/" ? "navigation-link__underline" : ""}`} />
-                    </Link>
-                    <Link 
-                        to="/movies" 
-                        className={`navigation__link navigation__link-signin navigation__link_movies button 
+                <button className="navigation__button navigation__button_close button" onClick={handleButtonClick} />
+                <ul className="navigation__movies-links">
+                    <li className="navigation__link-elem">
+                        <Link 
+                            to="/" 
+                            className={`navigation__link navigation__link-signin navigation__link_main button 
                         `}
-                    >
-                        Фильмы
-                        <div className={`${location.pathname === "/movies" ? "navigation-link__underline" : ""}`} />
-                    </Link>
-                    <Link 
-                        to="/saved-movies" 
-                        className={`navigation__link navigation__link-signin navigation__link_saved-movies button
-                        `}
-                    >
-                        Сохранённые фильмы
-                        <div className={`${location.pathname === "/saved-movies" ? "navigation-link__underline" : ""}`} />
-
-                    </Link>
-                </div>
+                        >
+                            Главная
+                            <div className={`${location.pathname === "/" ? "navigation__link-underline" : ""}`} />
+                        </Link>
+                    </li>
+                    <li className="navigation__link-elem navigation__link-elem_movies">
+                        <Link 
+                            to="/movies" 
+                            className={`navigation__link navigation__link-signin navigation__link_movies button 
+                            `}
+                        >
+                            Фильмы
+                            <div className={`${location.pathname === "/movies" ? "navigation__link-underline" : ""}`} />
+                        </Link>
+                    </li>
+                    <li className="navigation__link-elem">
+                        <Link 
+                            to="/saved-movies" 
+                            className={`navigation__link navigation__link-signin navigation__link_saved-movies button
+                            `}
+                        >
+                            Сохранённые фильмы
+                            <div className={`${location.pathname === "/saved-movies" ? "navigation__link-underline" : ""}`} />
+                        </Link>
+                    </li>
+                </ul>
                 <Link to="/profile" className="navigation__link navigation__link_profile button">Аккаунт</Link>
             </div>
             <div className={`navigation__overlay ${isBurgerOnClick ? "navigation__overlay_opened" : ""}`} />
-            <button className="navigation__burger button" onClick={handleButtonClick} />
+            <button type="button" className="navigation__burger button" onClick={handleButtonClick} />
         </>
         
     )

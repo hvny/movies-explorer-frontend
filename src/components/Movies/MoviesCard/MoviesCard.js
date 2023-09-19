@@ -15,12 +15,12 @@ function MoviesCard({ movie }) {
     }
 
     return (
-        <article className="movie-card">
-            <button className={saveCardButton} onClick={handleSaveCard}></button>
+        <li className="movie-card">
+            <button type="button" className={saveCardButton} onClick={handleSaveCard} />
             <img src={movie.src} alt = {movie.name} className="movie-card__image" />
             <h2 className="movie-card__title">{movie.name}</h2>
             <p className="movie-card__duration">{movie.duration}</p>
-        </article>
+        </li>
     );
 }
 

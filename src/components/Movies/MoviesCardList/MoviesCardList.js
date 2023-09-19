@@ -9,16 +9,18 @@ function MoviesCardList() {
     const containerSelector = location.pathname === "/saved-movies" ? "card-list_saved" : "";
 
     return (
-        <section className={`card-list ${containerSelector}`}>
-            {location.pathname === "/movies" ? (
-                cards.map((movie, i) => (
-                    <MoviesCard movie={movie} key={i} />
-                ))
-            ) : (
-                savedCards.map((movie, i) => (
-                    <MoviesCard movie={movie} key={i} />
-                ))
-            )}
+        <section className={`cards ${containerSelector}`}>
+            <ul className="cards__list">
+                {location.pathname === "/movies" ? (
+                    cards.map((movie, i) => (
+                        <MoviesCard movie={movie} key={i} />
+                    ))
+                ) : (
+                    savedCards.map((movie, i) => (
+                        <MoviesCard movie={movie} key={i} />
+                    ))
+                )}
+            </ul>
         </section>
     );
 }

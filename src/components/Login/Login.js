@@ -9,7 +9,7 @@ function Login() {
         <main>
             <section className="login auth">
             <Link to="/" className="auth__logo"><img src={logo} alt="Логотип проекта"></img></Link>
-            <h1 className="login__title auth-form__title">Рады видеть!</h1>
+            <h1 className="login__title auth__title">Рады видеть!</h1>
                 <AuthForm
                     name="signin-form"
                     linkText1="Войти"
@@ -17,7 +17,7 @@ function Login() {
                     linkSpan2="Регистрация"
                 > 
                     <div className="login__input-container auth-form__input-container">
-                        <p className="login__text auth-form__text">E-mail</p>
+                        <label className="login__text auth-form__text">E-mail</label>
                         <input 
                             type="email" 
                             minLength="2"
@@ -29,7 +29,7 @@ function Login() {
                         <span className="auth-form__error">Что-то пошло не так...</span>
                     </div>
                     <div className="login__input-container auth-form__input-container">
-                        <p className="login__text auth-form__text">Пароль</p>
+                        <label className="login__text auth-form__text">Пароль</label>
                         <input 
                             type="password"
                             autoComplete="off"
