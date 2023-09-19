@@ -35,6 +35,7 @@
     color: #8B8B8B;
     border: none;
     box-sizing: border-box;
+    outline: transparent solid;
 }
 
 .search__button {

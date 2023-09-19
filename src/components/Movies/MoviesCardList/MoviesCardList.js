@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 function MoviesCardList() {
     const location = useLocation();
-    const containerSelector = location.pathname === "/saved-movies" ? "card-list_saved" : "";
+    const containerSelector = location.pathname === "/saved-movies" ? "cards_saved" : "";
 
     return (
         <section className={`cards ${containerSelector}`}>

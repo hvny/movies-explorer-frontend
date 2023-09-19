@@ -11,7 +11,7 @@ function Navigation() {
     return (
         <nav className="navigation">
             <Link to="/">
-                <img src={logo} alt="Логотип проекта" className="navigation__logo"/>
+                <img src={logo} alt="Логотип проекта" className="navigation__logo button"/>
             </Link>
             <div className="navigation__container">
                 {location.pathname === "/" ? <SignoutNavigation /> : <SigninNavigation />}

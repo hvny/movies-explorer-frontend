@@ -1,11 +1,14 @@
 .promo {
-    width: 1200px;
-    margin: 0 auto 0 auto;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
     padding: 20px 0 0 0;
 }
 
 .promo__container {
-    width: 100%;
+    width: calc(100% - 80px);
     background-color: #272727;
     border-radius: 10px;
     display: flex;
@@ -50,11 +53,8 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
-    .promo {
-        width: 728px;
-    }
-
     .promo__container {
+        width: calc(100% - 40px);
         padding: 350px 0 30px 0;
     }
 
@@ -68,11 +68,11 @@
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
     .promo {
-        width: 292px;
         padding-top: 14px;
     }
 
     .promo__container {
+        width: calc(100% - 28px);
         padding: 220px 0 17px 0;
     }
 

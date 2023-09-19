@@ -14,7 +14,7 @@ function SigninNavigation() {
 
     return (    
         <>
-            <div className={`navigation__signin ${isBurgerOnClick === true ? "navigation_opened" : ""}`}>
+            <div className={`navigation__signin ${isBurgerOnClick === true ? "navigation__signin_opened" : ""}`}>
                 <button className="navigation__button navigation__button_close button" onClick={handleButtonClick} />
                 <ul className="navigation__movies-links">
                     <li className="navigation__link-elem">

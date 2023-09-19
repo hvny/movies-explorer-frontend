@@ -8,7 +8,7 @@ function Register() {
     return (
         <main>
             <section className="register auth">
-            <Link to="/" className="auth__logo"><img src={logo} alt="Логотип проекта"></img></Link>
+            <Link to="/" className="auth__logo button"><img src={logo} alt="Логотип проекта"></img></Link>
             <h1 className="register__title auth__title">Добро пожаловать!</h1>
                 <AuthForm
                     name="signup-form"
@@ -49,6 +49,8 @@ function Register() {
                             name="password"
                             autoComplete="off"
                             className="register__input auth-form__input" 
+                            minLength="2" 
+                            maxLength="30" 
                             placeholder="Пароль"
                         />
                         <span className="auth-form__error">Что-то пошло не так...</span>

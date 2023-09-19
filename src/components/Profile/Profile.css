@@ -50,6 +50,7 @@
     color: #ffffff;
     text-align: right;
     padding: 0;
+    outline: transparent solid;
 }
 
 .profile__input::placeholder {

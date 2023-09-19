@@ -8,7 +8,7 @@ function Login() {
     return (
         <main>
             <section className="login auth">
-            <Link to="/" className="auth__logo"><img src={logo} alt="Логотип проекта"></img></Link>
+            <Link to="/" className="auth__logo button"><img src={logo} alt="Логотип проекта"></img></Link>
             <h1 className="login__title auth__title">Рады видеть!</h1>
                 <AuthForm
                     name="signin-form"
@@ -32,6 +32,8 @@ function Login() {
                         <label className="login__text auth-form__text">Пароль</label>
                         <input 
                             type="password"
+                            minLength="2" 
+                            maxLength="30" 
                             autoComplete="off"
                             placeholder="Пароль"
                             className="login__input auth-form__input" 
