@@ -6,7 +6,7 @@
 }
 
 .techs__content {
-    width: 1140px;
+    width: calc(100% - 140px);
     margin: 0 auto 0 auto;
 }
 
@@ -73,7 +73,7 @@
     }
 
     .techs__content {
-        width: 668px;
+        width: calc(100% - 100px);
     }
 
     .techs__container {
@@ -99,8 +99,7 @@
     }
 
     .techs__content {
-        width: 284px;
-        margin: 0 auto 0 auto;
+        width: calc(100% - 36px);
     }
     
     .techs__title {

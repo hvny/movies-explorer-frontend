@@ -92,13 +92,6 @@
     }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1279px) {
-
-    .navigation__movies-links {
-        margin-right: 150px;
-    }
-}
-
 @media screen and (min-width: 320px) and (max-width: 1023px) {
     .navigation__signin {
         flex-direction: column;

@@ -1,5 +1,5 @@
 .footer{
-    width: 100%;
+    width: calc(100% - 140px);
     padding: 79px 0 0 0;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@
 }
 
 .footer__container {
-    width: 1140px;
+    width: 100%;
     border-top: 1px solid #424242;
     display: flex;
     justify-content: space-between;
@@ -52,12 +52,16 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) { 
-    .footer__container {
-        width: 708px;
+    .footer{
+        width: calc(100% - 60px);
     }
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
+    .footer {
+        width: calc(100% - 20px);
+    }
+
     .footer__text {
         font-size: 12px;
         margin-bottom: 21px;
@@ -68,7 +72,6 @@
     }
     
     .footer__container {
-        width: 300px;
         display: flex;
         flex-direction: column;
         align-items: center;

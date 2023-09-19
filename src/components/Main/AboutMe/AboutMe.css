@@ -5,7 +5,7 @@
 }
 
 .me__content {
-    width: 1140px;
+    width: calc(100% - 140px);
     margin: 0 auto 0 auto;
     color: #ffffff;
 }
@@ -75,7 +75,7 @@
     }
 
     .me__content {
-        width: 668px;
+        width: calc(100% - 100px);
     }
     
     .me__text {
@@ -114,7 +114,7 @@
     }
     
     .me__content {
-        width: 292px;
+        width: calc(100% - 28px);
     }
     
     .me__title {
@@ -128,11 +128,12 @@
         padding-top: 60px; 
         display: flex;
         flex-direction: column;
+        align-items: center;
         justify-content: space-between;
     }
     
     .me__text {
-        width: 292px;
+        width: 100%;
         order: 2;
     }
 

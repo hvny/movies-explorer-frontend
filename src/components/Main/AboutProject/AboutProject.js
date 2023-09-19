@@ -19,13 +19,13 @@ function AboutProject() {
                 </div>
                 <div className="project__bottom">
                     <div className="project__deadlines project__bottom-container">
-                        <p className="project__deadline project__deadline-text">1 неделя</p>
-                        <p className="project__deadline project__deadline-text">4 недели</p>
+                        <div className="project__deadline"><p className="project__deadline_one-week project__deadline-text">1 неделя</p></div>
+                        <div className="project__deadline"><p className="project__deadline_four-weeks project__deadline-text">4 недели</p></div>
                     </div>
                     
-                    <div className="project__deadline-descriptions  project__bottom-container">
-                        <p className="project__deadline-description project__deadline-text">Back-end</p>
-                        <p className="project__deadline-description project__deadline-text">Front-end</p>
+                    <div className="project__deadline-descriptions project__bottom-container">
+                        <div className="project__deadline-description "><p className="project__deadline-text">Back-end</p></div>
+                        <div className="project__deadline-description"><p className="project__deadline-text">Front-end</p></div>
                     </div>
                 </div>
             </div>
