@@ -2,12 +2,13 @@ import "./Register.css";
 import "../Auth/Auth.css";
 import logo from "../../../src/images/logo.svg";
 import AuthForm from "../AuthForm/AuthForm";
+import { Link } from "react-router-dom";
 
 function Register() {
     return (
         <main>
             <section className="register auth">
-            <img src={logo} alt="Логотип проекта" className="auth__logo" ></img>
+            <Link to="/" className="auth__logo"><img src={logo} alt="Логотип проекта"></img></Link>
             <h1 className="register__title auth-form__title">Добро пожаловать!</h1>
 
                 <AuthForm
@@ -25,7 +26,7 @@ function Register() {
                             className="register__input auth-form__input" 
                             minLength="2" 
                             maxLength="30" 
-                        
+                            placeholder="Имя"
                         />
                         <span className="auth-form__error">Что-то пошло не так...</span>
                     </div>
@@ -38,6 +39,7 @@ function Register() {
                             className="register__input auth-form__input" 
                             minLength="2" 
                             maxLength="30"
+                            placeholder="E-mail"
                         />
                         <span className="auth-form__error">Что-то пошло не так...</span>
                     </div>
@@ -48,8 +50,7 @@ function Register() {
                             name="password"
                             autoComplete="off"
                             className="register__input auth-form__input" 
-                            minLength="2" 
-                            maxLength="30"
+                            placeholder="Пароль"
                         />
                         <span className="auth-form__error">Что-то пошло не так...</span>
                     </div>

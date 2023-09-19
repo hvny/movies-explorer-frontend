@@ -33,6 +33,8 @@ function Profile() {
                             <input 
                                 type="text" 
                                 name="name" 
+                                minLength="2"
+                                maxLength="30"
                                 placeholder={formValue.name} 
                                 required 
                                 className="profile__input" 
@@ -43,6 +45,8 @@ function Profile() {
                             <input 
                                 type="email" 
                                 name="email" 
+                                minLength="2"
+                                maxLength="30"
                                 placeholder={formValue.email} 
                                 required 
                                 className="profile__input" 
@@ -50,7 +54,7 @@ function Profile() {
                         </div>
                         <div className="profile__links-container">
                             <button type="submit" className="profile__button profile__button_edit button">Редактировать</button>
-                            <Link to="/signin" className="profile__button profile__button_exit button">Выйти из аккаунта</Link>
+                            <Link to="/" className="profile__button profile__button_exit button">Выйти из аккаунта</Link>
                         </div>
                     </form>
                 </section>

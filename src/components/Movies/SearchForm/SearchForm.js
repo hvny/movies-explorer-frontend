@@ -23,7 +23,7 @@ function SearchForm() {
                         className="search__checkbox search__checkbox_custom" 
                         htmlFor="search-checkbox"
                     />
-                    <label className="search__text" id="search-checkbox">Короткометражки</label>
+                    <label className="search__text button" id="search-checkbox">Короткометражки</label>
                 </div>
             </form>
         </section>

@@ -18,7 +18,7 @@ function AboutMe() {
                         </p>
                         <a href="https://github.com/hvny" target="_blank" rel="noreferrer" className="me__link button">Github</a>
                     </div>
-                    <img className="me__photo" src={avatar} alt="аватар" />
+                    <img className="me__photo" src={avatar} alt="Моё фото" />
                 </div>
             </div>
         </section>
