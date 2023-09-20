@@ -88,7 +88,7 @@
     text-decoration: none;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) { 
+@media screen and (max-width: 768px) { 
     .profile {
         padding-top: 236px;
     }

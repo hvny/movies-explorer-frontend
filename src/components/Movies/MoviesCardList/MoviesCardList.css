@@ -1,10 +1,12 @@
 .cards {
-    width: 1140px;
+    width: calc(100% - 140px);
     margin: 0 auto 0 auto;
     padding: 70px 0 28px 0;
+    box-sizing: border-box;
 }
 
 .cards__list {
+    width: 100%;
     padding: 0;
     margin: 0;
     list-style-type: none;

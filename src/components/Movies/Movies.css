@@ -1,3 +1,7 @@
+.movies {
+    width: 100%;
+}
+
 .movies__button {
     width: 320px;
     height: 36px;
