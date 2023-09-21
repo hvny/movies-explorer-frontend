@@ -1,0 +1,119 @@
+.search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0 0 0;
+    margin: 0 0 10px 0;
+}
+
+.search__form {
+    width: 1140px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    row-gap: 28px;
+    border-bottom: 1px solid #2F2F2F;
+}
+
+.search__input-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.search__input {
+    width: 1086px;
+    height: 50px;
+    background-color: #2F2F2F;
+    border-radius: 8px;
+    padding: 0 0 0 20px;
+    margin: 0 10px 0 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #8B8B8B;
+    border: none;
+    box-sizing: border-box;
+    outline: transparent solid;
+}
+
+.search__button {
+    width: 44px;
+    height: 44px;
+    background: url("../../../../src/images/search-button.svg") no-repeat center / cover;
+    border: none;
+}
+
+.search__checkbox-container {
+    display: flex;
+    margin: 0 0 40px 0;
+}
+
+.search__checkbox+label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.search__checkbox+label::before {
+    content: "";
+    display: inline-block;
+    flex-direction: column;
+    width: 36px;
+    height: 20px;
+    background: url("../../../../src/images/smalltumb.svg") no-repeat center / cover;
+    margin: 0 12px 0 0;
+    border: none;
+}
+
+.search__checkbox_custom {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.search__text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #ffffff;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) { 
+    .search__form {
+        width: 708px;
+        row-gap: 40px;
+    }
+
+    .search__input {
+        width: 654px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) { 
+    .search__form {
+        width: 292px;
+        row-gap: 47px;
+    }
+    
+    .search__input-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .search__input {
+        width: 238px;
+        height: 44px;
+        padding-left: 13px;
+    }
+
+    .search__checkbox+label::before {
+        margin-right: 13px;
+    }
+
+    .search__text {
+        font-size: 11px;
+    }
+}

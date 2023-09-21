@@ -1,0 +1,9 @@
+.login__input-container:last-of-type {
+    margin: 0 0 179px 0;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) { 
+    .login__input-container:last-of-type {
+        margin-bottom: 267px;
+    }
+}

@@ -1,0 +1,165 @@
+.me {
+    background-color: #202020;
+    padding: 110px 0 0 0;
+    margin: 0 0 100px 0;
+}
+
+.me__content {
+    width: calc(100% - 140px);
+    margin: 0 auto 0 auto;
+    color: #ffffff;
+}
+
+.me__title {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+    margin: 0 0 23px 0;
+}
+
+.me__container {
+    width: 100%;
+    border-top: 1px solid #DADADA;
+    padding: 66px 0 0 0; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.me__text {
+    width: 600px;
+}
+
+.me__name {
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 58px;
+    letter-spacing: -2px;
+    margin: 0 0 18px 0;
+}
+
+.me__status {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0 0 26px 0;
+}
+
+.me__info {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    margin: 0 0 99px 0;
+}
+
+.me__link {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.me__photo {
+    width: 270px;
+    height: 327px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) { 
+    .me {
+        padding-top: 90px;
+        margin-bottom: 90px;
+    }
+
+    .me__content {
+        width: calc(100% - 100px);
+    }
+    
+    .me__text {
+        width: 364px;
+    }
+
+    .me__name {
+        font-size: 40px;
+        line-height: 40px;
+        margin-bottom: 16px;
+    }
+    
+    .me__status {
+        font-size: 12px;
+        line-height: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .me__info {
+        font-size: 12px;
+        line-height: 18px;
+        margin-bottom: 87px;
+    }
+
+    .me__photo {
+        width: 255px;
+        height: 307px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .me {
+        background-color: #202020;
+        padding-top: 70px;
+        margin-bottom: 70px;
+    }
+    
+    .me__content {
+        width: calc(100% - 28px);
+    }
+    
+    .me__title {
+        font-size: 18px;
+        margin-bottom: 28px;
+    }
+    
+    .me__container {
+        width: 100%;
+        border-top: 1px solid #DADADA;
+        padding-top: 60px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .me__text {
+        width: 100%;
+        order: 2;
+    }
+
+    .me__name {
+        font-size: 30px;
+        line-height: normal;
+        letter-spacing: -1.2px;
+        margin-bottom: 20px;
+    }
+    
+    .me__status {
+        font-size: 11px;
+        line-height: 16px;
+        margin-bottom: 20px;
+    }
+    
+    .me__info {
+        font-size: 11px;
+        line-height: 16px;
+        margin-bottom:  40px;
+    }
+
+    .me__photo {
+        width: 292px;
+        height: 352px;
+        order: 1;
+        margin-bottom: 40px;
+    }
+}

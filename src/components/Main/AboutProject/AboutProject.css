@@ -1,0 +1,223 @@
+.project {
+    width: calc(100vw - 140px);
+    margin: 0 auto 0 auto;
+    padding: 110px 0 0 0;
+    color: #ffffff;
+}
+
+.project__title {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+    margin: 0 0 23px 0;
+}
+
+.project__container {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    padding: 70px 0 0 0;
+    border-top: 1px solid #DADADA;
+    box-sizing: border-box;
+}
+
+.project__info {
+    width: 550px;
+    margin: 0 0 110px 0;
+}
+
+.project__info:first-of-type {
+    margin-right: 40px;
+}
+
+.project__info-title {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.8px;
+    margin: 0 0 26px 0;
+}
+
+.project__info-text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0;
+}
+
+.project__bottom {
+    width: 100%;
+    margin: 0 0 110px 0;
+}
+
+.project__bottom-container {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.project__deadlines {
+    margin: 0 0 14px 0;
+}
+
+.project__deadline-text {
+    width: 200px;
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+}
+
+.project__deadline {
+    width: 20%;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    line-height: normal;
+    color: #000000;
+    background-color: #3DDC84;
+}
+
+.project__deadline:last-of-type {
+    width: 80%;
+    background-color: #303030;
+    color: #ffffff;
+}
+
+.project__deadline-description {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    line-height: 17px;
+    color: #8B8B8B;
+}
+
+.project__deadline-description:last-of-type {
+    width: 80%;
+} 
+
+@media screen and (max-width: 768px) {
+    .project {
+        width: calc(100vw - 100px);
+        padding-top: 90px;
+    }
+    
+    .project__info {
+        width: 319px;
+        margin: 0 0 93px 0;
+    }
+    
+    .project__info:first-of-type {
+        margin-right: 30px;
+    }
+    
+    .project__info-title {
+        margin: 0 0 22px 0;
+    }
+    
+    .project__info-text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    
+    .project__bottom {
+        width: 100%;
+        margin-bottom: 90px;
+    }
+
+    .project__deadline {
+        width: 140px;
+    }
+    
+    .project__deadline:last-of-type {
+        width: 528px;
+    }
+
+    .project__deadline-text {
+        width: 120px;
+    }
+
+    .project__deadline-description {
+        width: 140px;
+    }
+    
+    .project__deadline-description:last-of-type {
+        width: 528px;
+    } 
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .project {
+        width: calc(100vw - 36px);
+        padding-top: 70px;
+    }
+
+    .project__title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        margin-bottom: 28px;
+    }
+
+    .project__container {
+        padding-top: 60px;
+    }
+    
+    .project__info {
+        width: 284px;
+        margin: 0 0 60px 0;
+    }
+    
+    .project__info:first-of-type {
+        margin: 0 0 56px 0;
+    }
+    
+    .project__info-title {
+        font-size: 18px;
+        margin-bottom: 16px;
+        letter-spacing: -0.72px;
+    }
+    
+    .project__info-text {
+        font-size: 11px;
+        line-height: 16px;
+    }
+    
+    .project__bottom {
+        width: 100%;
+        margin-bottom: 69px;
+    }
+
+    .project__deadlines {
+        margin-bottom: 10px;
+    }
+
+    .project__deadline-text {
+        width: 80px;
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .project__deadline {
+        width: 100px;
+    }
+    
+    .project__deadline:last-of-type {
+        width: 184px;
+    }
+    
+    .project__deadline-description {
+        width: 100px;
+    }
+    
+    .project__deadline-description:last-of-type {
+        width: 284px;
+    } 
+}

@@ -1,0 +1,40 @@
+.navigation__signout {
+    display: flex;
+}
+
+.navigation__link_signup {
+    color: #ffffff;
+    background-color: transparent;
+    margin: 0 30px 0 0;
+}   
+
+.navigation__link_signin {
+    width: 76px;
+    height: 32px;
+    color: #000000;
+    background-color: #3DDC84;
+    border-radius: 3px;
+}
+
+.navigation__link-signout {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    padding-top: 8px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .navigation__link_signup {
+        margin-right: 14px;
+    }   
+
+    .navigation__link_signin {
+        width: 54px;
+        height: 26px;
+    }
+
+    .navigation__link-signout {
+        font-size: 10px;
+        padding-top: 5px;
+    }
+}   
