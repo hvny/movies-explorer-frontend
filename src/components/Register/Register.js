@@ -1,10 +1,18 @@
 import "./Register.css";
 import "../Auth/Auth.css";
 import logo from "../../../src/images/logo.svg";
+
 import AuthForm from "../AuthForm/AuthForm";
+import useForm from "../Validation/Validation";
 import { Link } from "react-router-dom";
 
 function Register() {
+    const { values, handleChange, errors, isValid, resetForm } = useForm();
+    
+    function handleSubmit(evt) {
+        evt.preventDefault();
+    }
+
     return (
         <main>
             <section className="register auth">
@@ -15,6 +23,8 @@ function Register() {
                     linkText1="Зарегистрироваться"
                     linkText2="Уже зарегистрированы?"
                     linkSpan2="Войти"
+                    isValid={isValid}
+                    onSubmit={handleSubmit}
                 >
                     <div className="register__input-container auth-form__input-container">
                         <label className="register__text auth-form__text">Имя</label>
