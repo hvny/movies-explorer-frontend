@@ -19,8 +19,16 @@
     outline: transparent solid;
 }
 
+.auth-from__error-message {
+    font-size: 13px;
+    line-height: normal;
+    font-weight: 400;
+    text-align: center;
+    color: #EE3465;
+}
+
 .auth-form__error {
-    display: block;
+    display: none;
     font-size: 10px;
     font-weight: 400;
     line-height: normal;
@@ -28,7 +36,10 @@
     position: absolute;
     bottom: -22px;
     left: 0;
-    opacity: 0;
+}
+
+.auth-form__error_active {
+    display: block;
 }
 
 .auth-form__text {
@@ -51,6 +62,12 @@
     text-align: center;
     color: #FFF;
     margin: 0 0 16px 0;
+}
+
+.auth-form__button_disabled {
+    pointer-events: none;
+    background-color: #F8F8F8;
+    color: #C2C2C2;
 }
 
 .auth-form__link {
