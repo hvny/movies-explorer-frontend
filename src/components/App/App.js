@@ -10,48 +10,161 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import { mainApi } from "../../utils/MainApi";
+import * as auth from "../../utils/auth"; 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import { Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { moviesApi } from "../../utils/MoviesApi";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formError, setFormError] = useState("");
+  const [profileError, setProfileError] = useState("");
+  const [initialMovies, setInitialMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if(token) {
+      auth.getContent(token)
+        .then((res) => {
+          setLoggedIn(true);
+          setCurrentUser({
+            name: res.name,
+            email: res.email,
+          });
+        })
+        .catch(console.error);
+    }
+  }, []);
+  
+  /*
+  useEffect(() => {
+    if (loggedIn) {
+      moviesApi.getInitialMovies()
+        .then((res) => {
+          setInitialMovies(res);
+          localStorage.setItem("movies", res);
+        })
+        .catch(console.error)
+    }
+  }, [initialMovies, loggedIn]); */
 
-  function registration(email, password, name) {
+  useEffect(() => {
+    if(loggedIn) {
+      Promise.all([mainApi.getUserInfo(), mainApi.getSavedMovies([])])
+      .then(([user, movies]) => {
+        setCurrentUser(user);
+        setSavedMovies(movies);
+      })
+      .catch(console.error);
+    }
+  }, [loggedIn]);
+  
+  function registration(email, password, name) {    //регистрация
     setIsLoading(true);
-    mainApi.register(email, password, name)
+    auth.register(email, password, name)
       .then(() => {
         authorization(email, password);
       })
       .catch((err) => {
-        console.log(err);
         setFormError(err);
       })
       .finally(() => setIsLoading(false));
   }
 
-  function authorization(email, password) {
+  function authorization(email, password) {         //аутентификация
     setIsLoading(true);
-    mainApi.authorize(email, password)
+    auth.authorize(email, password)
       .then((res) => {
         if (res.token) {
           setLoggedIn(true);
           localStorage.setItem("jwt", res.token);
+          localStorage.setItem("loggedIn", true);
           navigate("/movies", {replace: true});
         }
       }) 
       .catch((err) => {
-        console.log(err);
         setFormError(err);
       })
       .finally(() => setIsLoading(false));
+  }
+
+  function signout() {
+    localStorage.clear();
+    setCurrentUser({});
+    setLoggedIn(false);
+    navigate("/", {replace: true});
+  }
+
+  function handleUpdateUser(newUserInfo) {          //обновление данных пользователя
+    setIsLoading(true);
+    mainApi.updateUserInfo(newUserInfo)
+      .then((res) => {
+        setCurrentUser(res);
+        setProfileError("Данные успешно обновлены.")
+      })
+      .catch((err) => {
+        console.log(err);
+        setProfileError("Проверьте правильность введённых данных.")
+      })
+      .finally(() => setIsLoading(false));
+  }
+  /*
+  function getInitialMovies() {
+    setIsLoading(true);
+    moviesApi.getInitialMovies()
+      .then((res) => {
+        setInitialMovies(res);
+        localStorage.setItem("movies", JSON.stringify(res));
+      })
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  function checkMovies() {
+    const movies = localStorage.getItem("movies");
+    if (movies) {
+      setInitialMovies(JSON.parse(movies));
+    }
+    else{
+      getInitialMovies();
+    }
+  }*/
+
+  function handleSaveMovie(movie) {                     //сохранение фильма
+    setIsLoading(true);
+    mainApi.saveMovie(movie)
+      .then((savedMovie) => {
+        setSavedMovies([savedMovie, ...savedMovies]);
+      })
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      })
+  }
+
+  function handleDeleteMovie(_id) {                            //удаление фильма
+    setIsLoading(true);
+    mainApi.deleteMovie(_id)
+      .then(() => {
+        const updatedMoviesArr = savedMovies.filter((c) => c._id !== _id);
+        setSavedMovies(updatedMoviesArr);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   return (
@@ -62,16 +175,29 @@ function App() {
           <Route path="/movies" element={<ProtectedRoute 
             element={Movies}
             loggedIn={loggedIn}
+            initialMovies={initialMovies}
+            savedMovies={savedMovies}
+            onSave={handleSaveMovie}
+            onDelete={handleDeleteMovie}
             />} 
           />
           <Route path="/saved-movies" element={<ProtectedRoute 
             element={SavedMovies}
             loggedIn={loggedIn}
+            initialMovies={initialMovies}
+            savedMovies={savedMovies}
+            onSave={handleSaveMovie}
+            onDelete={handleDeleteMovie}
+            isSaved={true}
             />} 
           />
           <Route path="/profile" element={<ProtectedRoute 
             element={Profile}
             loggedIn={loggedIn} 
+            isLoading={isLoading}
+            signout={signout}
+            onUpdate={handleUpdateUser}
+            profileError={profileError}
             />} 
           />
           <Route path="/signup" element={<Register 

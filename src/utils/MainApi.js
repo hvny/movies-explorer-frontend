@@ -12,47 +12,15 @@ class MainApi {
         return Promise.reject(`Ошибка: ${res.status}`);
     }
 
-    register(email, password, name) {
-        return fetch(`${this._baseUrl}/signup`, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password,
-                name: name
-            })
-        })
-        .then(res => this._checkForError(res));
-    }
-
-    authorize(email, password) {
-        return fetch(`${this._baseUrl}/signin`, {
-            credentials: "include",
-            method: "POST",
-            headers: {
-              "Accept": "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            }),
-          })
-          .then(res => this._checkForError(res))
-          .then((data) => {
-                localStorage.setItem('userId', data._id);
-                return data;
-          })
-    }
-
     /*получение данных пользователя*/
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             credentials: "include",
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
         })
         .then(res => this._checkForError(res));
     }
@@ -62,7 +30,10 @@ class MainApi {
         return fetch(`${this._baseUrl}/users/me`, {
                 credentials: "include",
                 method: "PATCH",
-                headers: this._headers,
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem('jwt')}`
+                },
                 body: JSON.stringify({
                     email: data.email,
                     name: data.name
@@ -70,6 +41,52 @@ class MainApi {
             })
             .then(res => this._checkForError(res));
     }
+
+    saveMovie(data) {
+        return fetch(`${this._baseUrl}/movies`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${localStorage.getItem('jwt')}`
+          },
+          body: JSON.stringify({
+            country: data.country,
+            director: data.director,
+            duration: data.duration, 
+            year: data.year,
+            description: data.description,
+            image: data.image,
+            trailerLink: data.trailerLink,
+            nameRU: data.nameRU,
+            nameEN: data.nameEN,
+            thumbnail: data.thumbnail,
+            movieId: data.movieId,
+          }),
+        })
+        .then(res => this._checkForError(res))
+    };
+
+    deleteMovie(movieId) {
+        return fetch(`${this._baseUrl}/movies/${movieId}`, {
+          method: 'DELETE',
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${localStorage.getItem('jwt')}`
+          },
+        })
+        .then((res) => this._checkStatus(res))
+    };
+
+    getSavedMovies() {
+        return fetch(`${this._baseUrl}/movies`,{
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            },
+        })
+        .then(res => this._checkForError(res))
+    };
 }
 
 export const mainApi = new MainApi({

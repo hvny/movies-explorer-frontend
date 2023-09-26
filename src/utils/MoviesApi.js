@@ -13,8 +13,8 @@ class MoviesApi {
     }
 
     /*получаем все фильмы*/
-    getMovies(){
-        return fetch(this._url, {
+    getInitialMovies(){
+        return fetch(this._baseUrl, {
             headers: this._headers,
         })
         .then(res => this._checkForError(res));
