@@ -36,31 +36,30 @@ function App() {
         .then((res) => {
           setLoggedIn(true);
           setCurrentUser({
-            name: res.name,
-            email: res.email,
+            name: res.data.name,
+            email: res.data.email,
           });
         })
         .catch(console.error);
     }
-  }, []);
-  
-  /*
+  }, [loggedIn]);
+
   useEffect(() => {
-    if (loggedIn) {
-      moviesApi.getInitialMovies()
-        .then((res) => {
-          setInitialMovies(res);
-          localStorage.setItem("movies", res);
-        })
-        .catch(console.error)
-    }
-  }, [initialMovies, loggedIn]); */
+    moviesApi.getInitialMovies()
+      .then((res) => {
+        setInitialMovies(res);
+      })
+      .catch(console.error);
+  }, []);
 
   useEffect(() => {
     if(loggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getSavedMovies([])])
       .then(([user, movies]) => {
-        setCurrentUser(user);
+        setCurrentUser({
+          name: user.data.name,
+          email: user.data.email
+        });
         setSavedMovies(movies);
       })
       .catch(console.error);
@@ -171,7 +170,10 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" 
+            element={<Main />} 
+            loggedIn={loggedIn}
+          />
           <Route path="/movies" element={<ProtectedRoute 
             element={Movies}
             loggedIn={loggedIn}

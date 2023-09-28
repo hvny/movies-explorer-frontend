@@ -4,7 +4,7 @@ import { cards, savedCards } from "../../../utils/cards";
 
 import { useLocation } from "react-router-dom";
 
-function MoviesCardList() {
+function MoviesCardList(props) {
     const location = useLocation();
     const containerSelector = location.pathname === "/saved-movies" ? "cards_saved" : "";
 
@@ -12,12 +12,15 @@ function MoviesCardList() {
         <section className={`cards ${containerSelector}`}>
             <ul className="cards__list">
                 {location.pathname === "/movies" ? (
-                    cards.map((movie, i) => (
-                        <MoviesCard movie={movie} key={i} />
+                    props.initialMovies.map((movie, i) => (
+                        <MoviesCard 
+                            movie={movie} 
+                            key={movie.id}
+                        />
                     ))
                 ) : (
                     savedCards.map((movie, i) => (
-                        <MoviesCard movie={movie} key={i} />
+                        <MoviesCard movie={movie} key={movie.id} />
                     ))
                 )}
             </ul>

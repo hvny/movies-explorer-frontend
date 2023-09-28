@@ -4,13 +4,13 @@ import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 
-function Movies() {
+function Movies(props) {
     return (
         <>  
             <Header />
             <main className="movies">
                 <SearchForm />
-                <MoviesCardList />
+                <MoviesCardList initialMovies={props.initialMovies} />
                 <button type="button" className="movies__button button">Ещё</button>
             </main>
         <Footer />
