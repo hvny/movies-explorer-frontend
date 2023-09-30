@@ -1,6 +1,6 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { cards, savedCards } from "../../../utils/cards";
+import Preloader from "../../Preloader/Preloader";
 
 import { useLocation } from "react-router-dom";
 
@@ -12,15 +12,24 @@ function MoviesCardList(props) {
         <section className={`cards ${containerSelector}`}>
             <ul className="cards__list">
                 {location.pathname === "/movies" ? (
-                    props.initialMovies.map((movie, i) => (
+                    props.isLoading ? <Preloader/> :
+                    props.movies.map((movie, i) => (
+                        i < props.moviesQuantity &&
                         <MoviesCard 
                             movie={movie} 
-                            key={movie.id}
+                            key={movie.movieId}
+                            onSave={props.onSave}
+                            onDelete={props.onDelete}
                         />
                     ))
                 ) : (
-                    savedCards.map((movie, i) => (
-                        <MoviesCard movie={movie} key={movie.id} />
+                    props.movies.map((movie, i) => (
+                        <MoviesCard 
+                            movie={movie} 
+                            key={movie.movieId} 
+                            onSave={props.onSave}
+                            onDelete={props.onDelete}
+                        />
                     ))
                 )}
             </ul>

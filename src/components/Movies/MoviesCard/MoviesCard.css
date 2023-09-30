@@ -9,6 +9,7 @@
 
 .movie-card__image {
     width: 100%;
+    height: 201px;
 }
 
 .movie-card__button {
@@ -36,11 +37,15 @@
 }
 
 .movie-card__title {
+    width: 250px;
     font-size: 13px;
     font-weight: 500;
     line-height: normal;
     color: #ffffff;
     margin: 0 0 0 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .movie-card__duration {
@@ -72,6 +77,10 @@
         row-gap: 25px;
     }   
 
+    .movie-card__image {
+        height: 190px;
+    }
+
     .movie-card__title {
         margin-left: 0;
     }
@@ -92,6 +101,10 @@
         width: 300px;
         row-gap: 16px;
     }   
+
+    .movie-card__image{
+        height: 168px;
+    }
 
     .movie-card__button {
         top: 10px;

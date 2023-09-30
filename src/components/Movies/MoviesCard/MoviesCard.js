@@ -21,9 +21,9 @@ function MoviesCard(props) {
     }
 
     return (
-        <li className="movie-card">
+        <li className="movie-card" title={props.movie.nameRU}>
             <button type="button" className={saveCardButton} onClick={handleSaveCard} />
-            <img src={props.movie.image.url} alt = {props.movie.nameRU} className="movie-card__image" />
+            <img src={`${props.movie.image}`} title={props.movie.nameRU} alt = {props.movie.nameRU} className="movie-card__image" />
             <h2 className="movie-card__title">{props.movie.nameRU}</h2>
             <p className="movie-card__duration">{setDuration(props.movie.duration)}</p>
         </li>

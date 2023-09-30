@@ -10,13 +10,14 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import { mainApi } from "../../utils/MainApi";
+import { moviesApi } from "../../utils/MoviesApi";
 import * as auth from "../../utils/auth"; 
+import changeMovie from "../../utils/changeMovie";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import { Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { moviesApi } from "../../utils/MoviesApi";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -45,14 +46,6 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    moviesApi.getInitialMovies()
-      .then((res) => {
-        setInitialMovies(res);
-      })
-      .catch(console.error);
-  }, []);
-
-  useEffect(() => {
     if(loggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getSavedMovies([])])
       .then(([user, movies]) => {
@@ -65,6 +58,10 @@ function App() {
       .catch(console.error);
     }
   }, [loggedIn]);
+
+  useEffect(() => {
+    checkMovies();
+  }, []);
   
   function registration(email, password, name) {    //регистрация
     setIsLoading(true);
@@ -115,29 +112,29 @@ function App() {
       })
       .finally(() => setIsLoading(false));
   }
-  /*
-  function getInitialMovies() {
-    setIsLoading(true);
-    moviesApi.getInitialMovies()
-      .then((res) => {
-        setInitialMovies(res);
-        localStorage.setItem("movies", JSON.stringify(res));
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
 
-  function checkMovies() {
-    const movies = localStorage.getItem("movies");
+
+  function checkMovies() {                           //проверяем, есть ли в хранилище дефолтные фильмы
+    const movies = localStorage.getItem("movies");   //если нет, то запрашиваем с сервера
     if (movies) {
       setInitialMovies(JSON.parse(movies));
     }
     else{
-      getInitialMovies();
+      setIsLoading(true);
+      moviesApi.getInitialMovies()
+        .then((data) => {
+          const changedMovies = changeMovie(data);
+          localStorage.setItem("movies", JSON.stringify(changedMovies));
+          setInitialMovies(changedMovies);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        })
     }
-  }*/
+  }
 
   function handleSaveMovie(movie) {                     //сохранение фильма
     setIsLoading(true);
