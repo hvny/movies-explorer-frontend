@@ -4,4 +4,4 @@
 
 ## [Ссылка на Pull Request](https://github.com/hvny/movies-explorer-frontend/pull/2)
 
-## [Ссылак на сайт](https://hvny-diplom.students.nomoredomainsrocks.ru/)
+## [Ссылка на сайт](https://hvny-diplom.students.nomoredomainsrocks.ru/)
