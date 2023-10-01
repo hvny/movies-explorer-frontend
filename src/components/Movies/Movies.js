@@ -8,7 +8,6 @@ import useWindowSize from "../../utils/useWindowSize";
 import {
     shortMovieDuration,
     windowSizeLarge,
-    windowSizeMedium,
     windowSizeSmall,
 } from "../../constants/constants";
 import {
