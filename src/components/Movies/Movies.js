@@ -24,8 +24,8 @@ function Movies(props) {
     const [movies, setMovies] = useState([]);
     const [shortMovies, setShortMovies] = useState([]);
     const [nextMovies, setNextMovies] = useState({current: 0, next: 0});
-    const [searchReq, setSearchReq] = useState('');
-    const [searchError, setSearchError] = useState('');
+    const [searchReq, setSearchReq] = useState("");
+    const [searchError, setSearchError] = useState("");
     const [isCheckbox, setIsCheckbox] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -44,7 +44,6 @@ function Movies(props) {
 
     useEffect(() => {
         searchMovies();
-        shortMoviesFilter();
     }, [searchReq, isCheckbox]);
 
     useEffect(() => {
@@ -55,7 +54,7 @@ function Movies(props) {
         if(isCheckbox){
             setMovies(shortMovies);
         }
-    });
+    }, [isCheckbox]);
 
     function handleSearchMovie(movies, keyword){        //поиск фильма
         return movies.filter((movie) => {
@@ -64,18 +63,10 @@ function Movies(props) {
         });
     }
 
-    function filterShortMovies(movies) {                //поиск короткометражек
+    function searchShortMovies(movies) {                
         return movies.filter((movie) => {
             return movie.duration <= shortMovieDuration;
         });
-    }
-
-    function shortMoviesFilter(){
-        setShortMovies(filterShortMovies(movies));
-    }
-
-    function handleCheckboxClick(value){
-        setIsCheckbox(value);
     }
 
     async function searchMovies() {
@@ -84,13 +75,16 @@ function Movies(props) {
         try {
             if(searchReq.length >= 0) {
                 const renderedMovies = await handleSearchMovie(props.initialMovies, searchReq);
-                console.log(searchReq)
                 if(renderedMovies.length === 0 && searchReq.length > 0) {
                     setSearchError("Ничего не найдено.");
                 } 
                 else if (renderedMovies.length > 0){
-                    setMovies(renderedMovies);
-                    setSearchError("");
+                    if (isCheckbox) {                                         //если отмечен чекбокс, то отбираем короткометражки
+                        setShortMovies(searchShortMovies(renderedMovies));
+                    }
+                    else {
+                        setMovies(renderedMovies);
+                    }
                     setReq("lastReq", searchReq);
                     setReq("lastMovies", renderedMovies);
                     setReq("lastCheckbox", isCheckbox);
@@ -111,9 +105,9 @@ function Movies(props) {
         const lastReq = localStorage.getItem("lastReq");
         const lastMovies = localStorage.getItem("lastMovies");
         const lastCheckbox = localStorage.getItem("lastCheckbox");
+
         if(lastReq){
           setSearchReq(getReq('lastReq'));
-          console.log(getReq('lastReq'))
         }
 
         if(lastMovies){
@@ -127,10 +121,15 @@ function Movies(props) {
         return;
     };
 
-    function handleButtonClick() {                  //кнопка "ещё"
-        setNextMovies({current: nextMovies.current + nextMovies.next, next: nextMovies.next });
+    function handleCheckbox(value){   //нажатие на чекбокс
+        setIsCheckbox(value);
     }
 
+    function handleButtonClick() {                  //кнопка "ещё"
+        if (!isCheckbox) {
+            setNextMovies({current: nextMovies.current + nextMovies.next, next: nextMovies.next });
+        }
+    }
 
     return (
         <>  
@@ -139,15 +138,16 @@ function Movies(props) {
                 <SearchForm 
                     searchReq={searchReq}
                     setSearchReq={setSearchReq}
-                    handleCheckbox={handleCheckboxClick}
+                    handleCheckboxClick={handleCheckbox}
                     isCheckbox={isCheckbox}
                 />
-                {searchError && <p className={`movies__error ${movies ? "" : "movies__error_active"}`}>{searchError}</p>}
+                {searchError && <p className={`movies__error ${movies.length > 0 ? "" : "movies__error_active"}`}>{searchError}</p>}
                 <MoviesCardList 
-                    movies={movies}
+                    movies={isCheckbox ? shortMovies : movies}
                     moviesQuantity={nextMovies.current}
+                    savedMovies={props.savedMovies}
                     onSave={props.onSave}
-                    odDelete={props.onDelete}
+                    onDelete={props.onDelete}
                     isLoading={isLoading}
                 />
                 {

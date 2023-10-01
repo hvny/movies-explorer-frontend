@@ -123,6 +123,7 @@ function App() {
       setIsLoading(true);
       moviesApi.getInitialMovies()
         .then((data) => {
+          console.log("data", data[0]._id);
           const changedMovies = changeMovie(data);
           localStorage.setItem("movies", JSON.stringify(changedMovies));
           setInitialMovies(changedMovies);

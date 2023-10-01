@@ -62,9 +62,13 @@
     flex-direction: column;
     width: 36px;
     height: 20px;
-    background: url("../../../../src/images/smalltumb.svg") no-repeat center / cover;
+    background: url("../../../../src/images/smalltumbDisabled.svg") no-repeat center / cover;
     margin: 0 12px 0 0;
     border: none;
+}
+
+.search__checkbox:checked+label::before{
+    background: url("../../../../src/images/smalltumb.svg") no-repeat center / cover;
 }
 
 .search__checkbox_custom {

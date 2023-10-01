@@ -9,15 +9,11 @@ function SearchForm(props) {
 
     useEffect(() => {   
         resetForm({ movieTitle: props.searchReq })
-    }, [props.searchReq])
+    }, [props.searchReq, resetForm])
     
     function handleSearchClick(evt) {
         evt.preventDefault();
         props.setSearchReq(values.movieTitle);
-    }
-
-    function handleCheckbox(evt) {
-        props.handleCheckboxClick(evt.target.checked);
     }
 
     return (
@@ -40,9 +36,10 @@ function SearchForm(props) {
                         type="checkbox" 
                         checked={props.isCheckbox} 
                         className="search__checkbox search__checkbox_custom" 
-                        onChange={handleCheckbox}
+                        onChange={(evt) => props.handleCheckboxClick(evt.target.checked)}
+                        id="search-checkbox"
                     />
-                    <label className="search__text button" id="search-checkbox">Короткометражки</label>
+                    <label className="search__text button" htmlFor="search-checkbox">Короткометражки</label>
                 </div>
             </form>
         </section>

@@ -73,8 +73,11 @@ class MainApi {
             "Content-Type": "application/json",
             authorization: `Bearer ${localStorage.getItem('jwt')}`
           },
+          params: {
+            id: movieId,
+          }
         })
-        .then((res) => this._checkStatus(res))
+        .then((res) => this._checkForError(res))
     };
 
     getSavedMovies() {

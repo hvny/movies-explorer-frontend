@@ -3,6 +3,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../../Preloader/Preloader";
 
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 function MoviesCardList(props) {
     const location = useLocation();
@@ -20,15 +21,18 @@ function MoviesCardList(props) {
                             key={movie.movieId}
                             onSave={props.onSave}
                             onDelete={props.onDelete}
+                            savedMovies={props.savedMovies}
                         />
                     ))
                 ) : (
-                    props.movies.map((movie, i) => (
+                    props.isLoading ? <Preloader/> :
+                    props.savedMovies.map((movie) => (
                         <MoviesCard 
                             movie={movie} 
                             key={movie.movieId} 
                             onSave={props.onSave}
                             onDelete={props.onDelete}
+                            savedMovies={props.savedMovies}
                         />
                     ))
                 )}
