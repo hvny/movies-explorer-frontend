@@ -1,6 +1,4 @@
 export default function changeMovie(movies) {
-  console.log("movies: ", movies);
-
   return (
     movies.map((movie) => ({
       country: movie.country,

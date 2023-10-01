@@ -113,7 +113,6 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
-
   function checkMovies() {                           //проверяем, есть ли в хранилище дефолтные фильмы
     const movies = localStorage.getItem("movies");   //если нет, то запрашиваем с сервера
     if (movies) {
@@ -123,7 +122,6 @@ function App() {
       setIsLoading(true);
       moviesApi.getInitialMovies()
         .then((data) => {
-          console.log("data", data[0]._id);
           const changedMovies = changeMovie(data);
           localStorage.setItem("movies", JSON.stringify(changedMovies));
           setInitialMovies(changedMovies);
