@@ -17,7 +17,6 @@ import {
 
 import { useEffect, useState } from "react";
 
-
 function Movies(props) {
     const windowSize  = useWindowSize();
     const [movies, setMovies] = useState([]);
@@ -27,7 +26,6 @@ function Movies(props) {
     const [searchError, setSearchError] = useState("");
     const [isCheckbox, setIsCheckbox] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
 
     useEffect(() => {                                  //определяем кол-во рядов в контейнере с карточками
         if (windowSize >= windowSizeLarge) {
@@ -39,21 +37,15 @@ function Movies(props) {
         else {
             setNextMovies({current: 8, next: 2});
         }
-    }, [windowSize]);  
-
-    useEffect(() => {
-        searchMovies();
-    }, [searchReq, isCheckbox]);
-
+    }, [windowSize]);
+    
     useEffect(() => {
         checkReqs();
     }, []);
 
     useEffect(() => {
-        if(isCheckbox){
-            setMovies(shortMovies);
-        }
-    }, [isCheckbox]);
+        setIsCheckbox(getReq('lastCheckbox'));
+    }, []);
 
     function handleSearchMovie(movies, keyword){        //поиск фильма
         return movies.filter((movie) => {
@@ -68,26 +60,31 @@ function Movies(props) {
         });
     }
 
-    async function searchMovies() {
+    async function searchMovies(req) {
         setIsLoading(true);
+        setSearchReq(req);
         setMovies([]);
+        setShortMovies([]);
         try {
-            if(searchReq.length >= 0) {
-                const renderedMovies = await handleSearchMovie(props.initialMovies, searchReq);
-                if(renderedMovies.length === 0 && searchReq.length > 0) {
+            if(req.length > 0) {
+                const renderedMovies = await handleSearchMovie(props.initialMovies, req);
+
+                if(renderedMovies.length === 0 && req.length > 0) {
                     setSearchError("Ничего не найдено.");
-                } 
-                else if (renderedMovies.length > 0){
-                    if (isCheckbox) {                                         //если отмечен чекбокс, то отбираем короткометражки
-                        setShortMovies(searchShortMovies(renderedMovies));
-                    }
-                    else {
-                        setMovies(renderedMovies);
-                    }
-                    setReq("lastReq", searchReq);
+               } 
+
+                else if (renderedMovies.length > 0 && req.length > 0){
+                    setShortMovies(searchShortMovies(renderedMovies));
+                    setMovies(renderedMovies);
+                    
+                    setReq("lastReq", req);
                     setReq("lastMovies", renderedMovies);
+                    setReq("lastShorts", shortMovies);
                     setReq("lastCheckbox", isCheckbox);
                 }
+            }
+            else {
+                setSearchError("Нужно ввести ключевое слово");
             }
             return;
         } 
@@ -103,8 +100,7 @@ function Movies(props) {
     function checkReqs(){
         const lastReq = localStorage.getItem("lastReq");
         const lastMovies = localStorage.getItem("lastMovies");
-        const lastCheckbox = localStorage.getItem("lastCheckbox");
-
+        const lastShorts = localStorage.getItem("lastShorts");
         if(lastReq){
           setSearchReq(getReq('lastReq'));
         }
@@ -113,15 +109,16 @@ function Movies(props) {
           setMovies(getReq('lastMovies'));
         }
 
-        if(lastCheckbox){
-          setIsCheckbox(getReq('lastCheckbox'));
+        if (lastShorts) {
+            setShortMovies(getReq('lastShorts'));
         }
-
         return;
     };
 
     function handleCheckbox(value){   //нажатие на чекбокс
         setIsCheckbox(value);
+        setReq("lastCheckbox", value);
+
     }
 
     function handleButtonClick() {                  //кнопка "ещё"
@@ -130,15 +127,19 @@ function Movies(props) {
         }
     }
 
+    console.log("length: ", shortMovies.length);
+
     return (
         <>  
             <Header />
             <main className="movies">
                 <SearchForm 
                     searchReq={searchReq}
+                    checkReqs={checkReqs}
                     setSearchReq={setSearchReq}
                     handleCheckboxClick={handleCheckbox}
                     isCheckbox={isCheckbox}
+                    handleSearch={searchMovies}
                 />
                 {searchError && <p className={`movies__error ${movies.length > 0 ? "" : "movies__error_active"}`}>{searchError}</p>}
                 <MoviesCardList 
@@ -150,7 +151,7 @@ function Movies(props) {
                     isLoading={isLoading}
                 />
                 {
-                    (movies.length > nextMovies.current) && (
+                    ((movies.length > nextMovies.current) && (!isCheckbox && shortMovies.length < nextMovies.current)) && (
                         <button type="button" className="movies__button button" onClick={handleButtonClick}>Ещё</button>
                     )
                 }

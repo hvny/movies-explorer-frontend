@@ -92,16 +92,16 @@
     margin: 0 0 16px 0;
 }
 
+.profile__button_edit:disabled{
+    cursor: default;
+    opacity: .6;
+}
+
 .profile__button_exit {
     width: 410px;
     font-weight: 500;
     color: #EE3465;
     text-decoration: none;
-}
-
-.profile__button_disabled {
-    opacity: .6;
-    cursor: default;
 }
 
 @media screen and (max-width: 768px) { 

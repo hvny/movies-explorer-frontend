@@ -20,6 +20,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .search__input {
@@ -43,6 +44,20 @@
     height: 44px;
     background: url("../../../../src/images/search-button.svg") no-repeat center / cover;
     border: none;
+}
+
+.search__error {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #EE3465;
+    display: none;
+}
+
+.search__error_active {
+    display: block;
 }
 
 .search__checkbox-container {

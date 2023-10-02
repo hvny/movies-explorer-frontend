@@ -71,10 +71,12 @@ function Profile(props) {
                         </div>
                         <div className="profile__links-container">
                             <span className='profile__text profile__error-message'>{props.profileError}</span>
-                            <button type="submit" 
-                                className={`profile__button profile__button_edit button ${!isValid ? "profile__button_disabled" : ""}`}
-                                 disabled={!isValid || !isDisabled || props.isLoading}>
-                            Редактировать
+                            <button 
+                                type="submit" 
+                                className="profile__button profile__button_edit button"
+                                disabled={!isValid || !isDisabled || props.isLoading}
+                            >
+                                Редактировать
                             </button>
                             <Link to="/" className="profile__button profile__button_exit button" onClick={props.signout}>Выйти из аккаунта</Link>
                         </div>

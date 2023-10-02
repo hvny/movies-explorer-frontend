@@ -15,13 +15,13 @@ import * as auth from "../../utils/auth";
 import changeMovie from "../../utils/changeMovie";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') ||  false);
   const [isLoading, setIsLoading] = useState(false);
   const [formError, setFormError] = useState("");
   const [profileError, setProfileError] = useState("");
@@ -29,7 +29,6 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
-  
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if(token) {
@@ -168,7 +167,6 @@ function App() {
         <Routes>
           <Route path="/" 
             element={<Main />} 
-            loggedIn={loggedIn}
           />
           <Route path="/movies" element={<ProtectedRoute 
             element={Movies}
@@ -198,18 +196,32 @@ function App() {
             profileError={profileError}
             />} 
           />
-          <Route path="/signup" element={<Register 
-            isLoading={isLoading}
-            registration={registration}
-            formError={formError}
-            />} 
-          />
-          <Route path="/signin" element={<Login 
-            isLoading={isLoading}
-            authorization={authorization}
-            formError={formError}
-            />} 
-          />
+          {
+            !loggedIn ? (
+              <Route path="/signup" element={<Register 
+                isLoading={isLoading}
+                registration={registration}
+                formError={formError}
+                />} 
+              />
+            ) : (
+              <Route path="/signup" element={<Navigate to="/"/>} />
+            )
+
+          }
+          {
+            !loggedIn ? (
+              <Route path="/signin" element={<Login 
+                isLoading={isLoading}
+                authorization={authorization}
+                formError={formError}
+                />} 
+              />
+            ) : (
+              <Route path="/signin" element={<Navigate to="/"/>} />
+            )
+          }
+          
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

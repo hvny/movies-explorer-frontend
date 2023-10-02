@@ -18,7 +18,7 @@ function Portfolio() {
                         </a>
                     </li>
                     <li className="portfolio__links-item">
-                        <a href="https://github.com/hvny/mesto" target="_blank" rel="noreferrer" className="portfolio__link button">
+                        <a href="https://hvny.github.io/mesto/" target="_blank" rel="noreferrer" className="portfolio__link button">
                             <p className="portfolio__link-name">Одностраничное приложение</p>
                             <span className="portfolio__link-icon">↗</span>
                         </a>

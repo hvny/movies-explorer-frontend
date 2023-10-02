@@ -2,23 +2,32 @@ import "./SearchForm.css"
 import useForm from "../../Validation/Validation";
 
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 
 function SearchForm(props) {
-    const { values, handleChange, resetForm } = useForm();
-
+    const { values, handleChange, errors, isValid, resetForm } = useForm();
+    const location = useLocation();
     useEffect(() => {   
         resetForm({ movieTitle: props.searchReq })
-    }, [props.searchReq, resetForm])
+    }, [resetForm, props.searchReq])
+
+    
     
     function handleSearchClick(evt) {
         evt.preventDefault();
-        props.setSearchReq(values.movieTitle);
+        if (location.pathname==="/movies") {
+            props.checkReqs();
+            props.handleSearch(values.movieTitle, props.isCheckbox);
+        }
+        else {
+            props.setSearchReq(values.movieTitle);
+        }   
     }
 
     return (
         <section className="search">
-            <form name="search_form" className="search__form" onSubmit={handleSearchClick}>
+            <form name="search_form" className="search__form" onSubmit={handleSearchClick} noValidate>
                 <div className="search__input-container">
                     <input 
                         type="text" 
