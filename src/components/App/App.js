@@ -41,7 +41,11 @@ function App() {
             email: res.data.email,
           });
         })
-        .catch(console.error);
+        .catch((err) => {
+          console.error();
+          setLoggedIn(false);
+          localStorage.clear();
+        });
     }
   }, [loggedIn]);
 
