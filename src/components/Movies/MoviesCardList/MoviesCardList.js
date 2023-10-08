@@ -3,14 +3,14 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../../Preloader/Preloader";
 
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 function MoviesCardList(props) {
     const location = useLocation();
-    const containerSelector = location.pathname === "/saved-movies" ? "cards_saved" : "";
+    const containerSelectorSaved = location.pathname === "/saved-movies" ? "cards_saved" : "";
+    const containerSelectorDefault = location.pathname === "/movies" && props.movies.length === 0 && !props.searchError ? "cards_empty" : "";
 
     return (
-        <section className={`cards ${containerSelector}`}>
+        <section className={`cards ${containerSelectorSaved} ${containerSelectorDefault}`}>
             <ul className="cards__list">
                 {location.pathname === "/movies" ? (
                     props.isLoading ? <Preloader/> :
@@ -22,6 +22,7 @@ function MoviesCardList(props) {
                             onSave={props.onSave}
                             onDelete={props.onDelete}
                             savedMovies={props.savedMovies}
+                            searchReq = {props.searchReq}
                         />
                     ))
                 ) : (
@@ -33,6 +34,7 @@ function MoviesCardList(props) {
                             onSave={props.onSave}
                             onDelete={props.onDelete}
                             savedMovies={props.savedMovies}
+                            searchReq = {props.searchReq}
                         />
                     ))
                 )}

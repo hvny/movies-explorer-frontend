@@ -4,6 +4,9 @@ import useForm from "../../Validation/Validation";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import {
+    setReq,
+} from "../../../utils/utils"
 
 function SearchForm(props) {
     const { values, handleChange, errors, isValid, resetForm } = useForm();
@@ -22,6 +25,10 @@ function SearchForm(props) {
         }
         else {
             props.setSearchReq(values.movieTitle);
+            setReq("lastReqSaved", values.movieTitle);
+            // if (values.movieTitle.length === 0) {
+            //     props.setSearchError("Нужно ввести ключевое слово");
+            // }
         }   
     }
 

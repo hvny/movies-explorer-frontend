@@ -15,6 +15,11 @@ import {
     getReq,
 } from "../../utils/utils"
 
+import {
+    handleSearchMovie,
+    searchShortMovies,
+} from "../../utils/search";
+
 import { useEffect, useState } from "react";
 
 function Movies(props) {
@@ -37,8 +42,8 @@ function Movies(props) {
         else {
             setNextMovies({current: 8, next: 2});
         }
-    }, [windowSize]);
-    
+    }, [windowSize, searchReq]);
+
     useEffect(() => {
         checkReqs();
     }, []);
@@ -47,40 +52,29 @@ function Movies(props) {
         setIsCheckbox(getReq('lastCheckbox'));
     }, []);
 
-    function handleSearchMovie(movies, keyword){        //поиск фильма
-        return movies.filter((movie) => {
-          const word = keyword.toLowerCase().trim();
-          return movie.nameRU.toLowerCase().indexOf(word) !== -1 || movie.nameEN.toLowerCase().indexOf(word) !== -1;
-        });
-    }
-
-    function searchShortMovies(movies) {                
-        return movies.filter((movie) => {
-            return movie.duration <= shortMovieDuration;
-        });
-    }
-
     async function searchMovies(req) {
         setIsLoading(true);
         setSearchReq(req);
         setMovies([]);
         setShortMovies([]);
+
         try {
             if(req.length > 0) {
                 const renderedMovies = await handleSearchMovie(props.initialMovies, req);
 
                 if(renderedMovies.length === 0 && req.length > 0) {
                     setSearchError("Ничего не найдено.");
-               } 
+                } 
 
                 else if (renderedMovies.length > 0 && req.length > 0){
-                    setShortMovies(searchShortMovies(renderedMovies));
                     setMovies(renderedMovies);
-                    
+                    const shorts = await searchShortMovies(renderedMovies);
+                    setShortMovies(shorts)
+
+                    setReq("lastShorts", shorts);
                     setReq("lastReq", req);
                     setReq("lastMovies", renderedMovies);
-                    setReq("lastShorts", shortMovies);
-                    setReq("lastCheckbox", isCheckbox);
+                    setReq("lastCheckbox", isCheckbox); 
                 }
             }
             else {
@@ -101,6 +95,7 @@ function Movies(props) {
         const lastReq = localStorage.getItem("lastReq");
         const lastMovies = localStorage.getItem("lastMovies");
         const lastShorts = localStorage.getItem("lastShorts");
+
         if(lastReq){
           setSearchReq(getReq('lastReq'));
         }
@@ -112,6 +107,7 @@ function Movies(props) {
         if (lastShorts) {
             setShortMovies(getReq('lastShorts'));
         }
+
         return;
     };
 
@@ -126,9 +122,7 @@ function Movies(props) {
             setNextMovies({current: nextMovies.current + nextMovies.next, next: nextMovies.next });
         }
     }
-
-    console.log("length: ", shortMovies.length);
-
+    
     return (
         <>  
             <Header />
@@ -141,7 +135,7 @@ function Movies(props) {
                     isCheckbox={isCheckbox}
                     handleSearch={searchMovies}
                 />
-                {searchError && <p className={`movies__error ${movies.length > 0 ? "" : "movies__error_active"}`}>{searchError}</p>}
+                {(searchError) && <p className={`movies__error ${movies.length > 0 ? "" : "movies__error_active"}`}>{searchError}</p>}
                 <MoviesCardList 
                     movies={isCheckbox ? shortMovies : movies}
                     moviesQuantity={nextMovies.current}
@@ -149,6 +143,8 @@ function Movies(props) {
                     onSave={props.onSave}
                     onDelete={props.onDelete}
                     isLoading={isLoading}
+                    searchError = {searchError}
+                    searchReq = {searchReq}
                 />
                 {
                     ((movies.length > nextMovies.current) && (!isCheckbox && shortMovies.length < nextMovies.current)) && (

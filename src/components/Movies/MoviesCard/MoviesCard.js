@@ -1,5 +1,4 @@
 import "./MoviesCard.css";
-import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function MoviesCard(props) {
@@ -37,8 +36,6 @@ function MoviesCard(props) {
             }
             else {
                 props.onDelete(id);
-                console.log("id: ", props.movie._id);
-                console.log("movie: ", props.movie);
             }
         }
         else {
