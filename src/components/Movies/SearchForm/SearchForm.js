@@ -21,7 +21,7 @@ function SearchForm(props) {
         evt.preventDefault();
         if (location.pathname==="/movies") {
             props.checkReqs();
-            props.handleSearch(values.movieTitle, props.isCheckbox);
+            props.handleSearch(values.movieTitle);
         }
         else {
             props.setSearchReq(values.movieTitle);

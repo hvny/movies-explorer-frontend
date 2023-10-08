@@ -40,9 +40,8 @@ function SavedMovies(props) {
     setIsLoading(true);
     setMovies([]);
         try {
-            if(searchReq.length >= 0) {
+            if(searchReq) {
                 const renderedMovies = await handleSearchMovie(props.savedMovies, searchReq);
-
                 if(renderedMovies.length === 0 && searchReq.length > 0) {
                     setSearchError("Ничего не найдено.");
                 } 
@@ -54,6 +53,9 @@ function SavedMovies(props) {
                         setMovies(renderedMovies);
                     }
                 }
+            }
+            else {
+                setSearchError("");
             }
             return;
         } 
