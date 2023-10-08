@@ -16,7 +16,7 @@ import {
 } from "../../utils/utils"
 
 import {
-    handleSearchMovie,
+    //handleSearchMovie,
     searchShortMovies,
 } from "../../utils/search";
 
@@ -52,12 +52,19 @@ function Movies(props) {
         setIsCheckbox(getReq('lastCheckbox'));
     }, []);
 
-    async function searchMovies(req) {
+    function handleSearchMovie(movies, keyword){        //поиск фильма
         setIsLoading(true);
+        return movies.filter((movie) => {
+          const word = keyword.toLowerCase().trim();
+          return movie.nameRU.toLowerCase().indexOf(word) !== -1 || movie.nameEN.toLowerCase().indexOf(word) !== -1;
+        });
+    }
+
+    async function searchMovies(req) {
+        //setIsLoading(true);
         setSearchReq(req);
         setMovies([]);
         setShortMovies([]);
-
         try {
             if(req.length > 0) {
                 const renderedMovies = await handleSearchMovie(props.initialMovies, req);
@@ -122,7 +129,7 @@ function Movies(props) {
             setNextMovies({current: nextMovies.current + nextMovies.next, next: nextMovies.next });
         }
     }
-    
+        
     return (
         <>  
             <Header />

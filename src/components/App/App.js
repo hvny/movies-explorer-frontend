@@ -23,7 +23,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') ||  false);
   const [isLoading, setIsLoading] = useState(false);
-  const [formError, setFormError] = useState("");
+  const [regFormError, setRegFormError] = useState("");
+  const [authFormError, setAuthFormError] = useState("");
   const [profileError, setProfileError] = useState("");
   const [initialMovies, setInitialMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -69,7 +70,7 @@ function App() {
         authorization(email, password);
       })
       .catch((err) => {
-        setFormError(err);
+        setRegFormError(err);
       })
       .finally(() => setIsLoading(false));
   }
@@ -86,7 +87,7 @@ function App() {
         }
       }) 
       .catch((err) => {
-        setFormError(err);
+        setAuthFormError(err);
       })
       .finally(() => setIsLoading(false));
   }
@@ -175,6 +176,7 @@ function App() {
             savedMovies={savedMovies}
             onSave={handleSaveMovie}
             onDelete={handleDeleteMovie}
+            isLoading={isLoading}
             />} 
           />
           <Route path="/saved-movies" element={<ProtectedRoute 
@@ -201,7 +203,7 @@ function App() {
               <Route path="/signup" element={<Register 
                 isLoading={isLoading}
                 registration={registration}
-                formError={formError}
+                formError={regFormError}
                 />} 
               />
             ) : (
@@ -214,7 +216,7 @@ function App() {
               <Route path="/signin" element={<Login 
                 isLoading={isLoading}
                 authorization={authorization}
-                formError={formError}
+                formError={authFormError}
                 />} 
               />
             ) : (

@@ -1,7 +1,9 @@
 import "./AuthForm.css";
+import useForm from "../Validation/Validation"; 
+
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import useForm from "../Validation/Validation"; 
+import { useEffect } from "react";
 
 function AuthForm(props) {
     const location = useLocation();
