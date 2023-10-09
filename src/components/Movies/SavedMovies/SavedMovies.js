@@ -37,10 +37,12 @@ function SavedMovies(props) {
     }, []);
 
    async function searchMovies() {
+    console.log("ok");
     setIsLoading(true);
     setMovies([]);
+    setSearchError("");
         try {
-            if(searchReq) {
+            if(searchReq.length >= 0) {
                 const renderedMovies = await handleSearchMovie(props.savedMovies, searchReq);
                 if(renderedMovies.length === 0 && searchReq.length > 0) {
                     setSearchError("Ничего не найдено.");
@@ -57,6 +59,7 @@ function SavedMovies(props) {
             else {
                 setSearchError("");
             }
+            console.log(searchError);
             return;
         } 
         catch(err) {
@@ -84,7 +87,7 @@ function SavedMovies(props) {
                     isCheckbox={isCheckbox}
                     setSearchError={setSearchError}
                 />
-                {searchError && <p className={`movies__error ${movies.length > 0 ? "" : "movies__error_active"}`}>{searchError}</p>}
+                {searchError ? <p className={`movies__error ${movies.length > 0 ? "" : "movies__error_active"}`}>{searchError}</p> :
                 <MoviesCardList 
                     savedMovies={!searchReq ? isCheckbox ? shortMovies : props.savedMovies : isCheckbox ? shortMovies : movies}
                     onSave={props.onSave}
@@ -92,6 +95,8 @@ function SavedMovies(props) {
                     isLoading={isLoading}
                     searchReq = {searchReq}
                 />
+                }
+                
             </main>
             <Footer />
         </>
