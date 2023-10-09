@@ -6,9 +6,12 @@ import Footer from "../Footer/Footer";
 
 import useWindowSize from "../../utils/useWindowSize";
 import {
-    shortMovieDuration,
     windowSizeLarge,
     windowSizeSmall,
+    nextMoviesDefault,
+    nextMoviesSizeLarge,
+    nextMoviesSizeMedium,
+    nextMoviesSizeSmall,
 } from "../../constants/constants";
 import {
     setReq,
@@ -16,7 +19,7 @@ import {
 } from "../../utils/utils"
 
 import {
-    //handleSearchMovie,
+    handleSearchMovie,
     searchShortMovies,
 } from "../../utils/search";
 
@@ -26,7 +29,7 @@ function Movies(props) {
     const windowSize  = useWindowSize();
     const [movies, setMovies] = useState([]);
     const [shortMovies, setShortMovies] = useState([]);
-    const [nextMovies, setNextMovies] = useState({current: 0, next: 0});
+    const [nextMovies, setNextMovies] = useState(nextMoviesDefault);
     const [searchReq, setSearchReq] = useState("");
     const [searchError, setSearchError] = useState("");
     const [isCheckbox, setIsCheckbox] = useState(false);
@@ -34,13 +37,13 @@ function Movies(props) {
 
     useEffect(() => {                                  //определяем кол-во рядов в контейнере с карточками
         if (windowSize >= windowSizeLarge) {
-            setNextMovies({current: 12, next: 3})
+            setNextMovies(nextMoviesSizeLarge)
         } 
         else if(windowSize <= windowSizeSmall) {
-            setNextMovies({current: 5, next: 2})
+            setNextMovies(nextMoviesSizeSmall)
         }
         else {
-            setNextMovies({current: 8, next: 2});
+            setNextMovies(nextMoviesSizeMedium);
         }
     }, [windowSize, searchReq]);
 
@@ -52,16 +55,8 @@ function Movies(props) {
         setIsCheckbox(getReq('lastCheckbox'));
     }, []);
 
-    function handleSearchMovie(movies, keyword){        //поиск фильма
-        setIsLoading(true);
-        return movies.filter((movie) => {
-          const word = keyword.toLowerCase().trim();
-          return movie.nameRU.toLowerCase().indexOf(word) !== -1 || movie.nameEN.toLowerCase().indexOf(word) !== -1;
-        });
-    }
-
     async function searchMovies(req) {
-        //setIsLoading(true);
+        setIsLoading(true);
         setSearchReq(req);
         setMovies([]);
         setShortMovies([]);

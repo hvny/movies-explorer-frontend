@@ -5,10 +5,6 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../../Footer/Footer";
 
 import {
-    shortMovieDuration,
-} from "../../../constants/constants";
-
-import {
     setReq,
     getReq,
 } from "../../../utils/utils"
@@ -37,7 +33,6 @@ function SavedMovies(props) {
     }, []);
 
    async function searchMovies() {
-    console.log("ok");
     setIsLoading(true);
     setMovies([]);
     setSearchError("");
@@ -59,7 +54,6 @@ function SavedMovies(props) {
             else {
                 setSearchError("");
             }
-            console.log(searchError);
             return;
         } 
         catch(err) {
