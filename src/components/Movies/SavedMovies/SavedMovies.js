@@ -32,12 +32,13 @@ function SavedMovies(props) {
         setSearchReq(getReq('lastReqSaved'));
     }, []);
 
-   async function searchMovies() {
-    setIsLoading(true);
-    setMovies([]);
-    setSearchError("");
+    async function searchMovies() {
+        setIsLoading(true);
+        setMovies([props.savedMovies]);
+        setShortMovies(searchShortMovies(props.savedMovies));
+        setSearchError("");
         try {
-            if(searchReq.length >= 0) {
+            if(searchReq) {
                 const renderedMovies = await handleSearchMovie(props.savedMovies, searchReq);
                 if(renderedMovies.length === 0 && searchReq.length > 0) {
                     setSearchError("Ничего не найдено.");
