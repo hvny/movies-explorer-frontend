@@ -37,6 +37,7 @@ function Movies(props) {
     const [searchError, setSearchError] = useState("");
     const [isCheckbox, setIsCheckbox] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isButton, setIsButton] = useState(false);
 
     useEffect(() => {                                  //определяем кол-во рядов в контейнере с карточками
         if (windowSize >= windowSizeLarge) {
@@ -58,7 +59,7 @@ function Movies(props) {
         setIsCheckbox(getReq('lastCheckbox'));
     }, []);
 
-    async function checkMovies() {
+    async function getMovies() {
         setIsLoading(true);
         await moviesApi.getInitialMovies()
         .then((data) => {
@@ -77,13 +78,14 @@ function Movies(props) {
     async function searchMovies(req) {
         setIsLoading(true);
         setSearchReq(req);
-        //setMovies([]);
+        setMovies([]);
         setSearchError("");
         setShortMovies([]);
+        await getMovies();
+
         try {
             if(req.length > 0) {
-                await checkMovies()
-                const renderedMovies = await handleSearchMovie(initialMovies, req);
+                const renderedMovies = await handleSearchMovie(getReq("movies"), req);
 
                 if(renderedMovies.length === 0 && req.length > 0) {
                     setSearchError("Ничего не найдено.");
@@ -111,7 +113,7 @@ function Movies(props) {
             setSearchError("Произошла ошибка. Пожалуйста, попробуйте ещё раз.");
         } 
         finally {
-            setIsLoading(false);
+           setIsLoading(false);
         };
     }
 

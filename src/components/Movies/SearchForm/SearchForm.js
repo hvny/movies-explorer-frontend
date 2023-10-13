@@ -26,9 +26,6 @@ function SearchForm(props) {
         else {
             props.setSearchReq(values.movieTitle);
             setReq("lastReqSaved", values.movieTitle);
-            // if (values.movieTitle.length === 0) {
-            //     props.setSearchError("Нужно ввести ключевое слово");
-            // }
         }   
     }
 
