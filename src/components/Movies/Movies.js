@@ -4,7 +4,6 @@ import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 
-import useWindowSize from "../../utils/useWindowSize";
 import {
     windowSizeLarge,
     windowSizeSmall,
@@ -13,11 +12,14 @@ import {
     nextMoviesSizeMedium,
     nextMoviesSizeSmall,
 } from "../../constants/constants";
+
+import useWindowSize from "../../utils/useWindowSize";
 import {
     setReq,
     getReq,
 } from "../../utils/utils"
-
+import changeMovie from "../../utils/changeMovie";
+import { moviesApi } from "../../utils/MoviesApi";
 import {
     handleSearchMovie,
     searchShortMovies,
@@ -28,6 +30,7 @@ import { useEffect, useState } from "react";
 function Movies(props) {
     const windowSize  = useWindowSize();
     const [movies, setMovies] = useState([]);
+    const [initialMovies, setInitialMovies] = useState([]);
     const [shortMovies, setShortMovies] = useState([]);
     const [nextMovies, setNextMovies] = useState(nextMoviesDefault);
     const [searchReq, setSearchReq] = useState("");
@@ -55,14 +58,32 @@ function Movies(props) {
         setIsCheckbox(getReq('lastCheckbox'));
     }, []);
 
+    async function checkMovies() {
+        setIsLoading(true);
+        await moviesApi.getInitialMovies()
+        .then((data) => {
+            const changedMovies = changeMovie(data);
+            localStorage.setItem("movies", JSON.stringify(changedMovies));
+            setInitialMovies(changedMovies);
+        })
+        .catch((err) => {
+            console.error();
+        })
+        .finally(() => {
+            setIsLoading(false);
+        })
+    }
+
     async function searchMovies(req) {
         setIsLoading(true);
         setSearchReq(req);
-        setMovies([]);
+        //setMovies([]);
+        setSearchError("");
         setShortMovies([]);
         try {
             if(req.length > 0) {
-                const renderedMovies = await handleSearchMovie(props.initialMovies, req);
+                await checkMovies()
+                const renderedMovies = await handleSearchMovie(initialMovies, req);
 
                 if(renderedMovies.length === 0 && req.length > 0) {
                     setSearchError("Ничего не найдено.");
@@ -71,6 +92,7 @@ function Movies(props) {
                 else if (renderedMovies.length > 0 && req.length > 0){
                     setMovies(renderedMovies);
                     const shorts = await searchShortMovies(renderedMovies);
+
                     setShortMovies(shorts)
 
                     setReq("lastShorts", shorts);

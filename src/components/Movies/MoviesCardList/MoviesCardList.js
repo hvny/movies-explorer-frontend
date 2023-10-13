@@ -7,27 +7,27 @@ import { useState, useEffect } from "react";
 
 function MoviesCardList(props) {
     const location = useLocation();
-    const [isPreloader, setIsPreloader] = useState(props.isLoading);
+    //const [isPreloader, setIsPreloader] = useState(props.isLoading);
     const containerSelectorSaved = location.pathname === "/saved-movies" ? "cards_saved" : "";
     const containerSelectorDefault = location.pathname === "/movies" && props.movies.length === 0 && !props.searchError ? "cards_empty" : "";
 
-    useEffect(()=> {
-        if (props.isLoading === true) {
-            setIsPreloader(true);
-        }
-        else {
-            setTimeout(() => {
-                setIsPreloader(false);
-            }, 100);
-        }
-    }, [props.isLoading]);
+    // useEffect(()=> {
+    //     if (props.isLoading === true) {
+    //         setIsPreloader(true);
+    //     }
+    //     else {
+    //         setTimeout(() => {
+    //             setIsPreloader(false);
+    //         }, 100);
+    //     }
+    // }, [props.isLoading]);
 
     return (
         <section className={`cards ${containerSelectorSaved} ${containerSelectorDefault}`}>
             {//isPreloader ? <Preloader/> : 
             <ul className="cards__list">
                 {location.pathname === "/movies" ? (
-                    isPreloader ? <Preloader/> :
+                    props.isLoading ? <Preloader/> :
                     props.movies.map((movie, i) => (
                         i < props.moviesQuantity &&
                         <MoviesCard 
