@@ -20,6 +20,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .search__input {
@@ -45,6 +46,20 @@
     border: none;
 }
 
+.search__error {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #EE3465;
+    display: none;
+}
+
+.search__error_active {
+    display: block;
+}
+
 .search__checkbox-container {
     display: flex;
     margin: 0 0 40px 0;
@@ -62,9 +77,13 @@
     flex-direction: column;
     width: 36px;
     height: 20px;
-    background: url("../../../../src/images/smalltumb.svg") no-repeat center / cover;
+    background: url("../../../../src/images/smalltumbDisabled.svg") no-repeat center / cover;
     margin: 0 12px 0 0;
     border: none;
+}
+
+.search__checkbox:checked+label::before{
+    background: url("../../../../src/images/smalltumb.svg") no-repeat center / cover;
 }
 
 .search__checkbox_custom {

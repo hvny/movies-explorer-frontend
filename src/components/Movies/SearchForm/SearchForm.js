@@ -1,28 +1,58 @@
-import { useState } from "react";
 import "./SearchForm.css"
+import useForm from "../../Validation/Validation";
 
-function SearchForm() {
-    const [checkbox, setCheckbox] = useState(false);
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-    function handleCheckbox() {
-        setCheckbox(!checkbox);
+import {
+    setReq,
+} from "../../../utils/utils"
+
+function SearchForm(props) {
+    const { values, handleChange, errors, isValid, resetForm } = useForm();
+    const location = useLocation();
+    useEffect(() => {   
+        resetForm({ movieTitle: props.searchReq })
+    }, [resetForm, props.searchReq])
+
+    
+    
+    function handleSearchClick(evt) {
+        evt.preventDefault();
+        if (location.pathname==="/movies") {
+            props.checkReqs();
+            props.handleSearch(values.movieTitle);
+        }
+        else {
+            props.setSearchReq(values.movieTitle);
+            setReq("lastReqSaved", values.movieTitle);
+        }   
     }
 
     return (
         <section className="search">
-            <form name="search_form" className="search__form">
+            <form name="search_form" className="search__form" onSubmit={handleSearchClick} noValidate>
                 <div className="search__input-container">
-                    <input type="text" className="search__input" placeholder="Фильм" required />
+                    <input 
+                        type="text" 
+                        name="movieTitle" 
+                        value={values.movieTitle || ''}
+                        className="search__input" 
+                        placeholder="Фильм" 
+                        required 
+                        onChange={handleChange}
+                    />
                     <button type="submit" className="search__button button"></button>
                 </div>
                 <div className="search__checkbox-container">
                     <input 
                         type="checkbox" 
-                        checked={checkbox} 
-                        onChange={handleCheckbox} 
+                        checked={props.isCheckbox} 
                         className="search__checkbox search__checkbox_custom" 
+                        onChange={(evt) => props.handleCheckboxClick(evt.target.checked)}
+                        id="search-checkbox"
                     />
-                    <label className="search__text button" id="search-checkbox">Короткометражки</label>
+                    <label className="search__text button" htmlFor="search-checkbox">Короткометражки</label>
                 </div>
             </form>
         </section>

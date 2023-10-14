@@ -63,6 +63,18 @@
 
 .profile__links-container {
     margin: 0 0 70px 0;
+    position: relative;
+}
+
+.profile__error-message {
+    display: block;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color:#EE3465;
+    margin: 0 auto 0px auto;
+    top: -30px;
+    left: 0;
 }
 
 .profile__button {
@@ -72,13 +84,17 @@
     line-height: normal;
     text-align: center;
     display: block;
-
 }
 
 .profile__button_edit {
     color: #ffffff;
     font-weight: 400;
     margin: 0 0 16px 0;
+}
+
+.profile__button_edit:disabled{
+    cursor: default;
+    opacity: .6;
 }
 
 .profile__button_exit {
